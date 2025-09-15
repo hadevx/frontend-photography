@@ -2,77 +2,50 @@ import React from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useGetPlansByCategoryQuery } from "../../redux/queries/planApi";
 import Layout from "../../Layout";
-import { Typography, Button, Card, CardBody, CardHeader } from "@material-tailwind/react";
-import { CheckCircle } from "lucide-react";
+import { CheckIcon } from "lucide-react";
+import { motion } from "framer-motion";
 
-function PricingCard({ planId, title, desc, price, duration, options, addOns }) {
+const PricingCard = ({ planId, title, desc, price, duration, options, addOns, featured }) => {
   const navigate = useNavigate();
+
   return (
-    <Card className="rounded-2xl border border-gray-100 shadow-md hover:shadow  transition-transform duration-300">
-      <CardHeader
-        floated={false}
-        shadow={false}
-        color="transparent"
-        className="!m-0 p-6 border-b border-gray-100 bg-gradient-to-tr from-gray-50 to-white rounded-t-2xl">
-        <Typography variant="h6" color="blue-gray" className="capitalize font-bold mb-1">
-          {title}
-        </Typography>
-        <Typography variant="small" className="font-normal !text-gray-500 mb-2">
-          {desc}
-        </Typography>
-        <Typography variant="small" className="text-xs uppercase tracking-wide text-gray-400">
-          {duration}
-        </Typography>
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ type: "spring", stiffness: 120 }}
+      className={`rounded-3xl p-8 ring-1 sm:p-10 shadow-lg flex flex-col justify-between transition-transform duration-300
+        ${featured ? "bg-gray-800 ring-white/10" : "bg-white/80 ring-gray-200 hover:shadow-2xl"}`}>
+      <h3 className={`text-2xl font-bold ${featured ? "text-indigo-400" : "text-gray-800"}`}>
+        {title}
+      </h3>
+      <p className={`mt-4  ${featured ? "text-gray-300" : "text-gray-600"}`}>{desc}</p>
+      <p className="mt-2  uppercase tracking-wide text--white">{duration}</p>
 
-        <Typography variant="h3" color="blue-gray" className="!mt-4 flex items-end gap-1">
-          <span className="text-4xl font-extrabold text-blue-600">{price.toFixed(3)} KD</span>
-          <Typography as="span" className="self-end opacity-70 text-base font-medium">
-            /session
-          </Typography>
-        </Typography>
-      </CardHeader>
-      <CardBody className="pt-6">
-        {/* Features */}
-        <ul className="flex flex-col gap-3 mb-6">
-          {options.map((info, idx) => (
-            <li key={idx} className="flex items-center gap-3 text-gray-700">
-              <span className="p-1 rounded-full bg-green-100">
-                <CheckCircle className="h-4 w-4 text-green-600" />
-              </span>
-              <Typography variant="small" className="font-normal text-sm">
-                {info}
-              </Typography>
-            </li>
-          ))}
-        </ul>
+      <p className="mt-6 flex items-baseline gap-x-2">
+        <span className={`text-4xl font-extrabold ${featured ? "text-white" : "text-blue-600"}`}>
+          {price.toFixed(3)} KD
+        </span>
+        <span className="text-base font-medium self-end opacity-70">/session</span>
+      </p>
 
-        {/* Add-ons */}
-        {addOns?.length > 0 && (
-          <div className="mb-6">
-            <Typography variant="small" className="font-semibold text-gray-800 mb-3 block">
-              Add-ons
-            </Typography>
-            <ul className="flex flex-col gap-2 text-gray-600 text-sm">
-              {addOns.map((add, idx) => (
-                <li key={idx} className="flex justify-between">
-                  <span>{add.name}</span>
-                  <span className="text-blue-500 font-medium">+{add.price.toFixed(3)} KD</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-        )}
+      <ul className="mt-6 space-y-3">
+        {options.map((feature, idx) => (
+          <li key={idx} className="flex items-center gap-3 text-gray-700">
+            <CheckIcon className={`h-5 w-5 ${featured ? "text-indigo-400" : "text-green-600"}`} />
+            {feature}
+          </li>
+        ))}
+      </ul>
 
-        <Button
-          fullWidth
-          onClick={() => navigate(`/booking/${planId}`)}
-          className="bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-700 hover:to-blue-600 text-white font-semibold py-3 rounded-xl transition">
-          Book Now
-        </Button>
-      </CardBody>
-    </Card>
+      <button
+        onClick={() => navigate(`/booking/${planId}`)}
+        className={`mt-8 w-full py-3 rounded-xl font-semibold text-white transition
+          ${featured ? "bg-indigo-500 hover:bg-indigo-400" : "bg-blue-600 hover:bg-blue-500"}`}>
+        Book Now
+      </button>
+    </motion.div>
   );
-}
+};
 
 const PlansByCategory = () => {
   const { id } = useParams();
@@ -83,35 +56,48 @@ const PlansByCategory = () => {
 
   return (
     <Layout>
-      <section className="py-20 px-6">
-        <div className="container mx-auto text-center">
-          <Typography color="blue-gray" className="mb-2 font-bold text-sm uppercase tracking-wider">
-            Photography Packages
-          </Typography>
-          <Typography
-            variant="h1"
-            color="blue-gray"
-            className="mb-4 !leading-snug lg:!text-4xl !text-2xl font-extrabold">
-            Choose the right plan for your special moments
-          </Typography>
-          <Typography variant="lead" className="mb-12 font-normal !text-gray-500 max-w-2xl mx-auto">
-            Each package is crafted to give you the best photography experience.
-          </Typography>
+      <section className="relative py-20 px-6 ">
+        {/* Background gradient shape */}
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 -z-10 transform-gpu overflow-hidden blur-3xl">
+          <div
+            className="absolute inset-0 w-full h-full bg-gradient-to-tr from-pink-500 to-indigo-500 opacity-20"
+            style={{
+              clipPath:
+                "polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)",
+            }}
+          />
+        </div>
 
-          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3 justify-center max-w-6xl mx-auto">
-            {plans?.map((plan) => (
-              <PricingCard
-                key={plan._id}
-                title={plan.name}
-                planId={plan._id}
-                desc={plan.description}
-                price={plan.discountedPrice}
-                duration={plan.duration}
-                options={plan.features || []}
-                addOns={plan.addOns || []}
-              />
-            ))}
-          </div>
+        {/* Header */}
+        <div className="mx-auto max-w-4xl text-center mb-12">
+          <h2 className="text-base font-semibold text-indigo-400 uppercase tracking-wide">
+            Pricing
+          </h2>
+          <h1 className="mt-2 text-4xl font-extrabold tracking-tight  sm:text-5xl">
+            Choose the right plan for your special moments
+          </h1>
+          <p className="mt-4 text-lg  max-w-2xl mx-auto">
+            Each package is crafted to give you the best photography experience.
+          </p>
+        </div>
+
+        {/* Pricing cards */}
+        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3 max-w-6xl mx-auto">
+          {plans?.map((plan, idx) => (
+            <PricingCard
+              key={plan._id}
+              planId={plan._id}
+              title={plan.name}
+              desc={plan.description}
+              price={plan.discountedPrice}
+              duration={plan.duration}
+              options={plan.features || []}
+              addOns={plan.addOns || []}
+              featured={plan.featured || false}
+            />
+          ))}
         </div>
       </section>
     </Layout>

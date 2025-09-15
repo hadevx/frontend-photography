@@ -7,10 +7,10 @@ import { logout } from "../../redux/slices/authSlice";
 import { toast } from "react-toastify";
 import Spinner from "../../components/Spinner";
 import { motion } from "framer-motion";
-import Badge from "../../components/Badge";
+import Badge from "../../components/Badge.jsx";
 import { useUpdateUserMutation, useLogoutMutation } from "../../redux/queries/userApi";
 import { setUserInfo } from "../../redux/slices/authSlice";
-// import { useGetMyOrdersQuery } from "../../redux/queries/orderApi.js";
+import { useGetMyOrdersQuery } from "../../redux/queries/orderApi.js";
 import Message from "../../components/Message.jsx";
 import clsx from "clsx";
 
@@ -31,8 +31,8 @@ function Profile() {
   const userInfo = useSelector((state) => state.auth.userInfo);
 
   //API get my orders
-  // const { data: myorders } = useGetMyOrdersQuery();
-
+  const { data: myorders } = useGetMyOrdersQuery();
+  console.log("my orders", myorders);
   //API logout
   const [logoutApiCall, { isLoading, error }] = useLogoutMutation();
 
@@ -74,7 +74,6 @@ function Profile() {
     visible: { opacity: 1, scale: 1 },
   };
 
-  const myorders = [];
   return (
     <Layout>
       <motion.div className="flex gap-10 mt-[70px] flex-col lg:flex-row  justify-center min-h-screen px-2 py-5">
@@ -203,22 +202,18 @@ function Profile() {
                       Placed in:{" "}
                       <span className="font-bold"> {order?.createdAt.substring(0, 10)}</span>
                     </h1>
+
                     <h1 className="flex flex-col gap-2 items-center text-sm md:text-base">
-                      Payment method: <span className="font-bold">{order?.paymentMethod}</span>
+                      Total price: <span className="font-bold">{order?.price.toFixed(3)} KD</span>
                     </h1>
-                    <h1 className="flex flex-col gap-2 items-center text-sm md:text-base">
-                      Total price:{" "}
-                      <span className="font-bold">{order?.totalPrice.toFixed(3)} KD</span>
-                    </h1>
-                    <h1 className="flex flex-col gap-2 items-center text-sm md:text-base">
-                      Products:
-                      <span className="font-bold">{order?.orderItems.length}</span>
-                    </h1>
+
                     <h1 className="flex flex-col gap-2 items-center text-sm md:text-base">
                       Status:
                       <span className="font-bold text-sm">
                         {order?.isDelivered ? (
-                          <Badge variant="success">Delivered </Badge>
+                          <Badge variant="success" icon={false}>
+                            Delivered{" "}
+                          </Badge>
                         ) : order?.isCanceled ? (
                           <Badge variant="danger">Canceled</Badge>
                         ) : (
