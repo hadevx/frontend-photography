@@ -199,7 +199,9 @@ export default function Header({ onSearch }) {
                 <UserIconSvg className="h-5 w-5" /> {userInfo.name}
               </Link>
             ) : (
-              <Link to="/login" className="px-3 py-2 hover:opacity-80 rounded-lg">
+              <Link
+                to="/login"
+                className="px-3 bg-rose-500 shadow-[0_5px_10px_rgba(244,63,94,0.7)]  text-white py-2 hover:opacity-80 transition-all duration-300 rounded-lg">
                 Login
               </Link>
             )}
@@ -214,7 +216,9 @@ export default function Header({ onSearch }) {
                   <UserIconSvg className="h-5 w-5" /> {userInfo.name}
                 </Link>
               ) : (
-                <Link to="/login" className="px-3 py-2 hover:opacity-80 rounded-lg">
+                <Link
+                  to="/login"
+                  className="px-2 py-1  bg-rose-500 shadow-[0_0_10px_rgb(244,63,94)]  text-white  transition-all hover:opacity-80 rounded-lg">
                   Login
                 </Link>
               )}
@@ -278,19 +282,6 @@ export default function Header({ onSearch }) {
                   className="py-2 hover:opacity-50">
                   Contact
                 </Link>
-
-                {/* Mobile search */}
-                <div className="relative mt-6 flex flex-col">
-                  <SearchIcon className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5" />
-                  <input
-                    type="text"
-                    placeholder="Search products..."
-                    value={searchQuery}
-                    onChange={handleSearchChange}
-                    onKeyDown={handleSearchSubmit}
-                    className="w-full pl-10 pr-4 py-2 rounded-lg border border-gray-300 text-zinc-900"
-                  />
-                </div>
 
                 <div className="mt-auto text-xs text-zinc-400 text-center">
                   <p>

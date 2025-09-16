@@ -32,7 +32,7 @@ export default function ReviewsMarquee() {
         transition={{
           repeat: Infinity,
           ease: "linear",
-          duration: 25,
+          duration: 15,
         }}>
         {[...reviews, ...reviews].map((review, idx) => (
           <div
@@ -64,7 +64,7 @@ export default function ReviewsMarquee() {
         transition={{
           repeat: Infinity,
           ease: "linear",
-          duration: 28,
+          duration: 15,
         }}>
         {[...reviews, ...reviews].map((review, idx) => (
           <div

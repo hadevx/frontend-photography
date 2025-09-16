@@ -18,12 +18,14 @@ import { MaterialsSection } from "../../components/MaterialSection";
 import { HeroSection } from "../../components/HeroSection";
 import CategoryList from "../category/CategoryList";
 import Marquee from "../../components/Marquee";
+import Carousel from "../../components/Carousel ";
 
 function Home() {
   return (
     <Layout>
       <HeroSection />
       <CategoryList />
+      {/* <Carousel /> */}
       <Marquee />
       {/* <FeaturedProducts products={products} isLoading={isLoading} /> */}
       {/* <CollectionStrip /> */}
