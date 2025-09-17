@@ -20,7 +20,9 @@ import About from "./pages/about/About";
 import Contact from "./pages/contact/Contact";
 import CategoryDetails from "./pages/category/CategoryDetails";
 import BookingPage from "./pages/category/BookingPage";
-
+import "./home.css";
+import "./card.css";
+import "./style.css";
 function App() {
   const userInfo = useSelector((state) => state.auth.userInfo);
   const { pathname } = useLocation();

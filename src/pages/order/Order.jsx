@@ -21,10 +21,11 @@ const Order = () => {
     return (Number(subtotal) + Number(order?.shippingPrice)).toFixed(3);
   };
 
+  console.log(order);
   return (
     <Layout>
       <div className="container mt-[70px] mx-auto p-4 min-h-screen">
-        <div className="max-w-4xl mx-auto space-y-8">
+        <div className="max-w-4xl mx-auto space-y-4">
           {/* ✅ Success Header */}
           <motion.div
             initial={{ scale: 0.9 }}
@@ -39,7 +40,7 @@ const Order = () => {
           </motion.div>
 
           {/* Order Summary Card */}
-          <div className="bg-white rounded-2xl shadow-lg border p-6 space-y-4">
+          <div className="bg-white rounded-2xl shadow border p-6 space-y-4">
             <div className="flex  flex-col md:flex-row gap-2 lg:justify-between md:items-center mb-4">
               <div>
                 <h2 className="text-lg lg:text-xl font-semibold text-gray-800 flex items-center gap-2">
@@ -76,6 +77,15 @@ const Order = () => {
                 <p>
                   <span className="font-semibold">People:</span> {order?.numberOfPeople}
                 </p>
+                <p>
+                  <span className="font-semibold">Add Ons:</span>
+                  {order?.selectedAddOns.map((addOn) => (
+                    <div dir="rtl" className="flex gap-2 justify-start flex-row-reverse">
+                      <span>{addOn.name}</span>
+                      <span>{addOn.price.toFixed(3)} KD</span>
+                    </div>
+                  ))}
+                </p>
               </div>
               <div className="space-y-2">
                 <p>
@@ -91,15 +101,14 @@ const Order = () => {
                   {order?.downPayment.toFixed(3)} KD
                 </p>
                 <p>
-                  <span className="font-semibold">Total Price:</span>{" "}
-                  {(order?.downPayment + order?.price).toFixed(3)} KD
+                  <span className="font-semibold">Total Price:</span> {order?.price.toFixed(3)} KD
                 </p>
               </div>
             </div>
           </div>
 
           {/* Customer Information Card */}
-          <div className="bg-white rounded-2xl shadow-lg border p-6 space-y-4">
+          <div className="bg-white rounded-2xl shadow border p-6 space-y-4">
             <h3 className="text-xl font-semibold text-gray-800 mb-4">Customer Information</h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="space-y-2">

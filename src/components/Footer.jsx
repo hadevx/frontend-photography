@@ -11,23 +11,23 @@ export default function Footer() {
   ];
 
   return (
-    <footer className="bg-white border-t border-white/[0.02] p-10">
-      <div className="container-custom py-16 lg:py-20">
+    <footer className="bg-black   border-white/[0.02] p-10">
+      <div className="container-custom ">
         {/* Main Footer Content */}
 
         {/* Bottom Section */}
         <motion.div
-          className="pt-8 pb-4 border-t border-neutral-200 flex justify-center items-center"
+          className="pt-2 pb-2  flex justify-center items-center"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           transition={{ duration: 0.6, delay: 0.3 }}
           viewport={{ once: true }}>
-          <div className="flex flex-col sm:flex-row items-center space-y-2 sm:space-y-0 sm:space-x-6 text-sm text-neutral-500 text-center">
+          <div className="flex flex-col sm:flex-row items-center space-y-2 sm:space-y-0 sm:space-x-6 text-sm text-white text-center">
             <p>&copy; {currentYear} WebSchema. All rights reserved.</p>
             <div className="flex space-x-6">
-              <p className="hover:text-neutral-700 transition-colors flex items-center gap-2">
+              <p className=" transition-colors flex items-center gap-2">
                 Designed by
-                <a href="https://ws-opal-alpha.vercel.app/" target="_blank">
+                <a href="https://webschema.online/" target="_blank">
                   <motion.div
                     whileHover={{ scale: 0.95 }}
                     className="rounded-full select-none border-2 border-gray-400 hover:border-gray-900 size-9 flex justify-center items-center transition">

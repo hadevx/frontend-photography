@@ -111,7 +111,7 @@ export default function Header({ onSearch }) {
         )}
       </div>
     ));
-
+  console.log(pathname);
   return (
     <>
       <motion.header
@@ -121,8 +121,9 @@ export default function Header({ onSearch }) {
             ? isScrolled
               ? "bg-white/[0.02] text-black backdrop-blur-md"
               : "bg-white/[0.02] text-white "
-            : "backdrop-blur-md ",
-          pathname.startsWith("category") ? "text-white" : ""
+            : pathname.startsWith("/category")
+            ? "backdrop-blur-md text-white shadow"
+            : ""
         )}
         initial={{ y: -100 }}
         animate={{ y: 0 }}
