@@ -123,7 +123,7 @@ export default function Header({ onSearch }) {
               : "bg-white/[0.02] text-white "
             : pathname.startsWith("/category")
             ? "backdrop-blur-md text-white shadow"
-            : ""
+            : "backdrop-blur-md"
         )}
         initial={{ y: -100 }}
         animate={{ y: 0 }}
