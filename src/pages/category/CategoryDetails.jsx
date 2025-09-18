@@ -6,11 +6,16 @@ import { CheckIcon } from "lucide-react";
 import { motion } from "framer-motion";
 import Loader from "../../components/Loader";
 import CustomLoader from "../../components/CustomLoader";
+
 const PricingCard = ({ planId, title, desc, price, duration, options, addOns, featured }) => {
   const navigate = useNavigate();
   console.log(options);
   return (
-    <div className="home-card1 w-[100vw] lg:w-full shadow-[0_0_10px_rgb(255,255,255)]">
+    <motion.div
+      initial={{ x: 100, opacity: 0 }} // start 100px left
+      whileInView={{ x: 0, opacity: 1 }} // move to normal position
+      transition={{ duration: 0.6, ease: "easeOut" }}
+      className="home-card1 w-[100vw] lg:w-[400px] shadow-[0_0_10px_rgb(255,255,255)]">
       <span className="home-text159">{title}</span>
       <span className=" mb-5 text-xl">{desc}</span>
       <span className=" text-4xl font-black mb-5 text-blue-700">{price.toFixed(3)} KD</span>
@@ -30,7 +35,7 @@ const PricingCard = ({ planId, title, desc, price, duration, options, addOns, fe
           </div>
         ))}
       </div>
-    </div>
+    </motion.div>
   );
 };
 
@@ -45,7 +50,7 @@ const PlansByCategory = () => {
       ) : (
         <section className="relative py-20  lg:px-6 home-pricing overflow-hidden">
           {/* Background gradient shape */}
-          <div
+          {/*   <div
             aria-hidden="true"
             className="absolute inset-0 -z-10 transform-gpu overflow-hidden blur-3xl">
             <div
@@ -55,7 +60,7 @@ const PlansByCategory = () => {
                   "polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)",
               }}
             />
-          </div>
+          </div> */}
 
           {/* Header */}
           <div className="mx-auto max-w-4xl text-center mb-12 mt-12">

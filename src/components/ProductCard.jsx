@@ -6,8 +6,8 @@ export default function ProductCard({ product }) {
   return (
     <Link to={`/category/${product._id}`}>
       <motion.div
-        className="group relative bg-white overflow-hidden cursor-pointer"
-        style={{ borderRadius: "24px", boxShadow: "rgba(0, 0, 0, 0.1) 0px 10px 50px" }}
+        className="group relative  overflow-hidden cursor-pointer"
+        style={{ borderRadius: "24px", boxShadow: "rgba(0, 0, 0, 0.3) 0px 10px 50px" }}
         layout>
         {/* Badges */}
 

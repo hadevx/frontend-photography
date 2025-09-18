@@ -23,12 +23,19 @@ import PlansList from "../plans/PlansList";
 import Testimonals from "./../../components/Testimonals";
 import HowItWorks from "../../components/HowItWorks";
 import ActiveUsers from "../../components/ActiveUsers";
+import FAQ from "../../components/FAQ";
+import AddOns from "../../components/AddOns";
+import Contact from "../../components/Contact";
+import Test from "../../components/Test";
 function Home() {
   return (
     <Layout>
       <HeroSection />
       {/* <PlansList /> */}
       <CategoryList />
+      {/* <Test /> */}
+      <Contact />
+      <AddOns />
       <HowItWorks />
       <section className="home-quote-container">
         <div className="home-quote1">
@@ -50,14 +57,15 @@ function Home() {
         </div>
       </section>
       <section className="home-statistics">
-        <div className="home-container15">
+        <div className="home-container15 grid grid-cols-2 lg:grid-cols-4">
           <ActiveUsers caption="— Active users" statistic="3.5M"></ActiveUsers>
           <ActiveUsers caption="— Brands" statistic="50k"></ActiveUsers>
-          <ActiveUsers caption="— Accounts Managed" statistic="250K"></ActiveUsers>
+          <ActiveUsers caption="— Likes" statistic="250K"></ActiveUsers>
           <ActiveUsers caption="— Active leads" statistic="30M"></ActiveUsers>
         </div>
       </section>
       <Testimonals />
+      <FAQ />
       {/* <Carousel /> */}
       {/* <Marquee /> */}
       {/* <FeaturedProducts products={products} isLoading={isLoading} /> */}
